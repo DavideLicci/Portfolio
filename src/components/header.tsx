@@ -16,12 +16,14 @@ export function Header({ lang, dict, showProjects }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const otherLang: Locale = lang === "it" ? "en" : "it";
 
+  // Percorsi completi, così i link funzionano anche fuori dalla home (es. dalla pagina 404).
+  const home = `/${lang}`;
   const links = [
-    { href: "#about", label: dict.about },
-    { href: "#skills", label: dict.skills },
-    { href: "#journey", label: dict.journey },
-    ...(showProjects ? [{ href: "#projects", label: dict.projects }] : []),
-    { href: "#contact", label: dict.contact },
+    { href: `${home}#about`, label: dict.about },
+    { href: `${home}#skills`, label: dict.skills },
+    { href: `${home}#journey`, label: dict.journey },
+    ...(showProjects ? [{ href: `${home}#projects`, label: dict.projects }] : []),
+    { href: `${home}#contact`, label: dict.contact },
   ];
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function Header({ lang, dict, showProjects }: HeaderProps) {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line/70 bg-bg/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
         <a
-          href="#top"
+          href={`${home}#top`}
           className="rounded-md font-mono text-sm text-fg transition-colors hover:text-accent"
         >
           <span className="text-accent">~/</span>davide-licci

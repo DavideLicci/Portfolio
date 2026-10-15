@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { projects } from "@/content/projects";
-import { hasLocale, locales } from "@/i18n/config";
+import { defaultLocale, hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { fontVariables } from "../fonts";
 import "../globals.css";
@@ -42,11 +41,13 @@ export default async function RootLayout({
   params,
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
-  const dict = getDictionary(lang);
+  // Con una lingua sconosciuta (es. /fr) il layout usa l'italiano e la pagina
+  // chiama notFound(), così la 404 compare dentro il sito con header e footer.
+  const locale = hasLocale(lang) ? lang : defaultLocale;
+  const dict = getDictionary(locale);
 
   return (
-    <html lang={lang} className={`${fontVariables} antialiased`}>
+    <html lang={locale} className={`${fontVariables} antialiased`}>
       <body className="min-h-dvh font-sans">
         <a
           href="#main"
@@ -54,7 +55,7 @@ export default async function RootLayout({
         >
           {dict.nav.skip}
         </a>
-        <Header lang={lang} dict={dict.nav} showProjects={projects.length > 0} />
+        <Header lang={locale} dict={dict.nav} showProjects={projects.length > 0} />
         <main id="main">{children}</main>
         <Footer dict={dict.footer} />
       </body>

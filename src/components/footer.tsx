@@ -21,7 +21,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
             <GithubIcon className="size-5" />
           </a>
           <a
-            href="#top"
+            href="#main"
             className="inline-flex min-h-11 items-center gap-2 rounded-lg px-3 font-mono text-xs text-muted transition-colors hover:text-accent"
           >
             {dict.backToTop}
