@@ -15,7 +15,7 @@ Apri http://localhost:3000: ti porta su `/it` o `/en` in base alla lingua del br
 
 | Cosa | File |
 | --- | --- |
-| Nome, ruolo, link GitHub, foto, linguaggi | `src/content/profile.ts` |
+| Nome, ruolo, link GitHub, foto, competenze | `src/content/profile.ts` |
 | Testi in italiano | `src/i18n/dictionaries/it.ts` |
 | Testi in inglese | `src/i18n/dictionaries/en.ts` |
 | Progetti (la sezione compare quando la lista non è vuota) | `src/content/projects.ts` |

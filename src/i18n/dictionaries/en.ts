@@ -24,8 +24,13 @@ const en: Dictionary = {
       "I write code in Python, C#, C, Java and PHP. I studied Computer Science in Jesi, Italy, and at Loccioni I managed the project for a fuel injector test bench.",
     ctaContact: "Get in touch",
     ctaGithub: "GitHub",
-    languagesFile: "languages.txt",
-    experienceDir: "experience",
+    photoAlt: "Photo of Davide Licci",
+    chipWork: "Intern @ Loccioni",
+    chipSchool: "ITIS Computer Science",
+  },
+  marquee: {
+    pause: "Pause the technologies ticker",
+    play: "Resume the technologies ticker",
   },
   about: {
     title: "About",
@@ -42,12 +47,20 @@ const en: Dictionary = {
       experienceValue: "Loccioni · 2024",
       github: "github",
     },
-    photoAlt: "Photo of Davide Licci",
+    stats: {
+      school: "years of Computer Science at ITIS",
+      tech: "technologies I work with",
+      stage: "the year of my Loccioni internship",
+    },
   },
   skills: {
     title: "Skills",
-    intro: "The languages I work with.",
-    languagesTitle: "Languages",
+    intro: "The languages and tools I work with.",
+    groups: {
+      languages: "Languages",
+      webAndData: "Web & databases",
+      tools: "Tools",
+    },
   },
   journey: {
     title: "Journey",

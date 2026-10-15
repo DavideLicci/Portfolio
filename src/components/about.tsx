@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { profile } from "@/content/profile";
+import { profile, technologies } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { CountUp } from "./count-up";
 import { Section } from "./section";
 
 type AboutProps = {
@@ -16,9 +16,15 @@ export function About({ index, dict }: AboutProps) {
     [dict.facts.github, `@${profile.github.username}`],
   ];
 
+  const stats = [
+    { value: 5, label: dict.stats.school },
+    { value: technologies.length, label: dict.stats.tech },
+    { value: 2024, from: 2020, label: dict.stats.stage },
+  ];
+
   return (
     <Section id="about" index={index} title={dict.title}>
-      <div className="grid gap-12 md:grid-cols-[1fr_auto] md:gap-16 [&>*]:min-w-0">
+      <div className="grid gap-12 md:grid-cols-[1fr_15rem] md:gap-14 [&>*]:min-w-0">
         <div className="reveal">
           <div className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
             {dict.paragraphs.map((paragraph) => (
@@ -47,28 +53,20 @@ export function About({ index, dict }: AboutProps) {
           </pre>
         </div>
 
-        <div className="reveal mx-auto md:mx-0">
-          <div className="group relative size-56 sm:size-64">
-            <div
-              aria-hidden
-              className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-accent/60 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"
-            />
-            {profile.photo ? (
-              <Image
-                src={profile.photo}
-                alt={dict.photoAlt}
-                width={512}
-                height={512}
-                sizes="(min-width: 640px) 256px, 224px"
-                className="relative size-full rounded-2xl border border-line object-cover"
-              />
-            ) : (
-              <div className="relative grid size-full place-items-center rounded-2xl border border-line bg-surface">
-                <span className="font-mono text-6xl text-accent">{profile.initials}</span>
-              </div>
-            )}
-          </div>
-        </div>
+        <ul className="reveal grid grid-cols-3 gap-3 self-start sm:gap-4 md:grid-cols-1">
+          {stats.map((stat) => (
+            <li
+              key={stat.label}
+              data-spotlight
+              className="rounded-xl border border-line bg-surface p-4 sm:p-5"
+            >
+              <p className="font-mono text-3xl text-accent sm:text-4xl">
+                <CountUp value={stat.value} from={stat.from} />
+              </p>
+              <p className="mt-2 text-xs leading-snug text-muted sm:text-sm">{stat.label}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </Section>
   );

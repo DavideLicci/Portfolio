@@ -91,6 +91,7 @@ export function ContactForm({ dict }: { dict: FormDict }) {
   return (
     <form
       noValidate
+      data-spotlight
       onSubmit={handleSubmit}
       className="space-y-5 rounded-xl border border-line bg-surface p-5 sm:p-7"
     >

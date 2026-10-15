@@ -61,12 +61,14 @@ function Step({ icon: Icon, period, role, org, last = false, children }: StepPro
         </span>
         {!last && <span aria-hidden className="mt-2 w-px flex-1 bg-line" />}
       </div>
-      <div className={last ? "pt-1.5" : "pt-1.5 pb-14"}>
-        <p className="font-mono text-sm text-accent">{period}</p>
-        <h3 className="mt-1 font-mono text-lg text-fg sm:text-xl">
-          {role} <span className="text-muted">@ {org}</span>
-        </h3>
-        {children}
+      <div className={last ? undefined : "pb-8"}>
+        <div data-spotlight className="rounded-xl border border-line bg-surface/60 p-5 sm:p-6">
+          <p className="font-mono text-sm text-accent">{period}</p>
+          <h3 className="mt-1 font-mono text-lg text-fg sm:text-xl">
+            {role} <span className="text-muted">@ {org}</span>
+          </h3>
+          {children}
+        </div>
       </div>
     </li>
   );

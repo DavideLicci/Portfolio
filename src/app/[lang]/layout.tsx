@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { SpotlightTracker } from "@/components/spotlight-tracker";
 import { projects } from "@/content/projects";
 import { defaultLocale, hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -58,6 +59,7 @@ export default async function RootLayout({
         <Header lang={locale} dict={dict.nav} showProjects={projects.length > 0} />
         <main id="main">{children}</main>
         <Footer dict={dict.footer} />
+        <SpotlightTracker />
       </body>
     </html>
   );

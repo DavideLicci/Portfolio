@@ -1,34 +1,33 @@
-import { ArrowRight } from "lucide-react";
-import { languages, profile } from "@/content/profile";
+import { ArrowRight, Briefcase, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { primaryButton, secondaryButton } from "./buttons";
+import { HeroBackdrop } from "./hero-backdrop";
 import { GithubIcon } from "./icons";
 
-export function Hero({ dict }: { dict: Dictionary["hero"] }) {
-  return (
-    <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-size-[56px_56px] opacity-40 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-48 left-1/2 h-96 w-2xl -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
-      />
+type HeroDict = Dictionary["hero"];
 
-      <div className="relative mx-auto grid max-w-5xl gap-14 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center [&>*]:min-w-0">
-        <div>
+export function Hero({ dict }: { dict: HeroDict }) {
+  return (
+    <section id="top" className="relative overflow-hidden pt-28 pb-24 sm:pt-36 sm:pb-32">
+      <HeroBackdrop />
+
+      <div className="relative mx-auto grid max-w-5xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] [&>*]:min-w-0">
+        <div className="order-last lg:order-first">
           <p className="animate-rise font-mono text-sm text-accent">$ whoami</p>
           <h1 className="mt-4 animate-rise font-mono font-medium tracking-tight [animation-delay:80ms]">
             <span className="block text-lg text-muted sm:text-xl">{dict.greeting}</span>
-            <span className="mt-1 block text-4xl text-fg sm:text-6xl">
-              {profile.name}
+            <span className="mt-1 block text-5xl leading-[1.05] sm:text-7xl">
+              <span className="bg-linear-to-r from-fg via-fg to-accent bg-clip-text text-transparent">
+                {profile.name}
+              </span>
               <span aria-hidden className="animate-blink text-accent">
                 _
               </span>
             </span>
           </h1>
-          <p className="mt-4 animate-rise font-mono text-lg text-accent [animation-delay:160ms]">
+          <p className="mt-5 animate-rise font-mono text-lg text-accent [animation-delay:160ms]">
             {profile.role}
           </p>
           <p className="mt-6 max-w-xl animate-rise text-base leading-relaxed text-muted [animation-delay:240ms] sm:text-lg">
@@ -51,43 +50,59 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
           </div>
         </div>
 
-        {/* Decorativo: ripete in forma di terminale informazioni già presenti nella pagina. */}
-        <div
-          aria-hidden
-          className="animate-rise overflow-hidden rounded-xl border border-line bg-surface shadow-2xl shadow-black/40 [animation-delay:400ms]"
-        >
-          <div className="flex items-center gap-2 border-b border-line px-4 py-3">
-            <span className="size-3 rounded-full bg-[#ff5f57]" />
-            <span className="size-3 rounded-full bg-[#febc2e]" />
-            <span className="size-3 rounded-full bg-[#28c840]" />
-            <span className="ml-2 font-mono text-xs text-muted">davide@portfolio: ~</span>
-          </div>
-          <pre className="overflow-x-auto p-5 font-mono text-sm leading-7 text-fg">
-            <code>
-              <Prompt command="whoami" />
-              {"davide-licci\n"}
-              <Prompt command={`cat ${dict.languagesFile}`} />
-              {languages.map((language) => language.name.toLowerCase()).join("  ")}
-              {"\n"}
-              <Prompt command={`ls ${dict.experienceDir}/`} />
-              <span className="text-[#7aa2f7]">loccioni-2024/  itis-informatica/</span>
-              {"\n"}
-              <span className="text-accent">$ </span>
-              <span className="animate-blink">▍</span>
-            </code>
-          </pre>
-        </div>
+        <Portrait dict={dict} />
       </div>
     </section>
   );
 }
 
-function Prompt({ command }: { command: string }) {
+const chip =
+  "absolute flex animate-float items-center gap-2 rounded-full border border-line bg-surface/90 px-3 py-1.5 font-mono text-xs whitespace-nowrap text-fg shadow-lg shadow-black/30 backdrop-blur";
+
+function Portrait({ dict }: { dict: HeroDict }) {
   return (
-    <>
-      <span className="text-accent">$ </span>
-      <span className="text-muted">{command}</span>
-      {"\n"}
-    </>
+    <div className="relative mx-auto w-56 animate-rise [animation-delay:120ms] sm:w-72 lg:w-80">
+      <div aria-hidden className="absolute -inset-8 rounded-[2.5rem] bg-accent/15 blur-3xl" />
+      <div
+        aria-hidden
+        className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-accent/60"
+      />
+
+      {profile.photo ? (
+        <Image
+          src={profile.photo}
+          alt={dict.photoAlt}
+          width={640}
+          height={640}
+          preload
+          sizes="(min-width: 1024px) 320px, (min-width: 640px) 288px, 224px"
+          className="relative aspect-square w-full rounded-2xl border border-line object-cover"
+        />
+      ) : (
+        <div className="relative grid aspect-square w-full place-items-center rounded-2xl border border-line bg-surface">
+          <span className="font-mono text-7xl text-accent">{profile.initials}</span>
+        </div>
+      )}
+
+      {/* Etichette decorative: le stesse informazioni sono nella sezione Percorso. */}
+      <div aria-hidden className={`${chip} -top-4 -left-5 sm:-left-10`}>
+        <Briefcase className="size-3.5 text-accent" />
+        {dict.chipWork}
+      </div>
+      <div aria-hidden className={`${chip} top-[58%] -right-5 [animation-delay:-2s] sm:-right-10`}>
+        <GraduationCap className="size-3.5 text-accent" />
+        {dict.chipSchool}
+      </div>
+      <div
+        aria-hidden
+        className="absolute -bottom-7 -left-4 animate-float rounded-lg border border-line bg-surface/95 px-4 py-2.5 font-mono text-xs leading-6 shadow-xl shadow-black/40 backdrop-blur [animation-delay:-4s] sm:-left-8"
+      >
+        <span className="text-accent">$ </span>
+        <span className="text-muted">whoami</span>
+        <br />
+        <span className="text-fg">davide-licci</span>
+        <span className="animate-blink text-accent">▍</span>
+      </div>
+    </div>
   );
 }

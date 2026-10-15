@@ -22,8 +22,13 @@ const it = {
       "Scrivo codice in Python, C#, C, Java e PHP. Ho studiato Informatica a Jesi e in Loccioni ho guidato il progetto di un banco prova per iniettori.",
     ctaContact: "Contattami",
     ctaGithub: "GitHub",
-    languagesFile: "linguaggi.txt",
-    experienceDir: "esperienze",
+    photoAlt: "Foto di Davide Licci",
+    chipWork: "Stage @ Loccioni",
+    chipSchool: "ITIS Informatica",
+  },
+  marquee: {
+    pause: "Ferma il nastro delle tecnologie",
+    play: "Fai ripartire il nastro delle tecnologie",
   },
   about: {
     title: "Chi sono",
@@ -40,12 +45,20 @@ const it = {
       experienceValue: "Loccioni · 2024",
       github: "github",
     },
-    photoAlt: "Foto di Davide Licci",
+    stats: {
+      school: "anni di Informatica all'ITIS",
+      tech: "tecnologie con cui lavoro",
+      stage: "l'anno dello stage in Loccioni",
+    },
   },
   skills: {
     title: "Competenze",
-    intro: "I linguaggi con cui lavoro.",
-    languagesTitle: "Linguaggi",
+    intro: "I linguaggi e gli strumenti con cui lavoro.",
+    groups: {
+      languages: "Linguaggi",
+      webAndData: "Web e database",
+      tools: "Strumenti",
+    },
   },
   journey: {
     title: "Percorso",

@@ -17,7 +17,7 @@ export function Section({ id, index, title, children }: SectionProps) {
         >
           <span className="text-base text-accent">{index}.</span>
           {title}
-          <span aria-hidden className="h-px flex-1 bg-line" />
+          <span aria-hidden className="reveal-line h-px flex-1 bg-linear-to-r from-accent/60 via-line to-line" />
         </h2>
         {children}
       </div>

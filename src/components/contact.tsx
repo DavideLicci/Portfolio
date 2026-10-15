@@ -22,6 +22,7 @@ export function Contact({ index, dict }: ContactProps) {
             href={profile.github.url}
             target="_blank"
             rel="noopener noreferrer"
+            data-spotlight
             className="group mt-8 flex items-center gap-4 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-accent/60"
           >
             <GithubIcon className="size-8 shrink-0 text-fg" />
