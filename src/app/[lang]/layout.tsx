@@ -17,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  if (!hasLocale(lang)) return {};
+  if (!hasLocale(lang)) return { title: "404 — Davide Licci" };
   const { meta } = getDictionary(lang);
 
   return {
