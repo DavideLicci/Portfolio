@@ -10,7 +10,7 @@ export const profile = {
   },
   // Metti la foto in public/ (es. public/profile.jpg) e scrivi qui il percorso: "/profile.jpg".
   // Finché resta null viene mostrato un avatar con le iniziali.
-  photo: null as string | null,
+  photo: "/profile.webp" as string | null,
 };
 
 export const languages = [

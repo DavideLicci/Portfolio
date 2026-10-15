@@ -59,6 +59,7 @@ export function About({ index, dict }: AboutProps) {
                 alt={dict.photoAlt}
                 width={512}
                 height={512}
+                sizes="(min-width: 640px) 256px, 224px"
                 className="relative size-full rounded-2xl border border-line object-cover"
               />
             ) : (
