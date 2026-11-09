@@ -3,6 +3,7 @@ import Link from "next/link";
 import { projects } from "@/content/projects";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { MascotSpot } from "./mascot/mascot-spot";
 import { ProjectSession } from "./project-session";
 import { Section } from "./section";
 
@@ -18,6 +19,7 @@ export function Projects({ index, lang, dict }: ProjectsProps) {
 
   return (
     <Section id="projects" index={index} title={dict.title}>
+      <MascotSpot variant="projects" className="mb-8" />
       <ul className="space-y-6">
         {projects.map((project) => {
           // Nella card basta un pezzo di partita: dalla telefonata in poi.
@@ -27,6 +29,7 @@ export function Projects({ index, lang, dict }: ProjectsProps) {
             <li
               key={project.slug}
               data-spotlight
+              data-mascot-hover="project"
               className="reveal group relative grid gap-8 rounded-2xl border border-line bg-surface p-6 sm:p-8 lg:grid-cols-[1fr_1.05fr] lg:items-center [&>*]:min-w-0"
             >
               <div>

@@ -5,6 +5,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { primaryButton, secondaryButton } from "./buttons";
 import { HeroBackdrop } from "./hero-backdrop";
 import { GithubIcon } from "./icons";
+import { MascotSpot } from "./mascot/mascot-spot";
 
 type HeroDict = Dictionary["hero"];
 
@@ -48,6 +49,7 @@ export function Hero({ dict }: { dict: HeroDict }) {
               {dict.ctaGithub}
             </a>
           </div>
+          <MascotSpot variant="hero" className="mt-10" />
         </div>
 
         <Portrait dict={dict} />

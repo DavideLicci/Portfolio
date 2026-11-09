@@ -2,6 +2,7 @@ import { ArrowUp } from "lucide-react";
 import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { GithubIcon } from "./icons";
+import { MascotToggle } from "./mascot/mascot-toggle";
 
 export function Footer({ dict }: { dict: Dictionary["footer"] }) {
   return (
@@ -11,6 +12,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
           © {profile.name} · {dict.madeWith}
         </p>
         <div className="flex items-center gap-2">
+          <MascotToggle />
           <a
             href={profile.github.url}
             target="_blank"

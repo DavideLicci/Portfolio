@@ -4,6 +4,7 @@ import { Check, CircleAlert, LoaderCircle, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { primaryButton } from "./buttons";
+import { emitMascot } from "./mascot/mascot-store";
 
 type FormDict = Dictionary["contact"]["form"];
 type Field = "name" | "email" | "message";
@@ -80,6 +81,7 @@ export function ContactForm({ dict }: { dict: FormDict }) {
       form.reset();
       setStatus("success");
       setFeedback(dict.success);
+      emitMascot("celebrate");
     } catch {
       setStatus("error");
       setFeedback(dict.error);

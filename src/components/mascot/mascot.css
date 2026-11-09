@@ -1,0 +1,202 @@
+/* Rig di Mini Davide (mascot-figure.tsx).
+   Ogni stato ha una posa statica (transform) e un'animazione che parte da quella posa:
+   con "riduci movimento" restano solo le pose. */
+
+.mascot {
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mascot .m-figure,
+.mascot .m-head,
+.mascot .m-torso,
+.mascot .m-arm-l,
+.mascot .m-arm-r,
+.mascot .m-leg-l,
+.mascot .m-leg-r,
+.mascot .m-eyes,
+.mascot .m-pupils,
+.mascot .m-brows,
+.mascot .m-shadow,
+.mascot .m-fx > * {
+  transform-box: view-box;
+}
+
+.mascot .m-figure { transform-origin: 50px 128px; }
+.mascot .m-shadow { transform-origin: 50px 129px; }
+.mascot .m-head { transform-origin: 50px 77px; }
+.mascot .m-torso { transform-origin: 50px 103px; }
+.mascot .m-arm-l { transform-origin: 34px 84px; }
+.mascot .m-arm-r { transform-origin: 66px 84px; }
+.mascot .m-leg-l { transform-origin: 43.5px 100px; }
+.mascot .m-leg-r { transform-origin: 56.5px 100px; }
+.mascot .m-eyes { transform-origin: 50px 56.4px; }
+
+.mascot .m-arm-l,
+.mascot .m-arm-r,
+.mascot .m-head,
+.mascot .m-pupils,
+.mascot .m-brows {
+  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+/* Parti alternative: compaiono solo negli stati che le usano */
+.mascot .m-eyes-happy,
+.mascot .m-eyes-closed,
+.mascot .m-mouth-open,
+.mascot .m-mouth-flat,
+.mascot .m-mouth-o,
+.mascot .m-finger,
+.mascot .m-fx {
+  opacity: 0;
+}
+
+/* ---------- Idle: respiro e battito di ciglia (anche base degli altri stati) ---------- */
+.mascot .m-torso { animation: m-breathe 3.4s ease-in-out infinite; }
+.mascot .m-head { animation: m-head-breathe 3.4s ease-in-out infinite; }
+.mascot .m-eyes { animation: m-blink 4.8s infinite; }
+.mascot .m-arm-l { transform: rotate(3deg); animation: m-arm-rest-l 3.4s ease-in-out infinite; }
+.mascot .m-arm-r { transform: rotate(-3deg); animation: m-arm-rest-r 3.4s ease-in-out infinite; }
+
+@keyframes m-breathe { 50% { transform: scaleY(1.03); } }
+@keyframes m-head-breathe { 50% { transform: translateY(-0.8px); } }
+@keyframes m-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  95.5% { transform: scaleY(0.08); }
+}
+@keyframes m-arm-rest-l { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(5deg); } }
+@keyframes m-arm-rest-r { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(-5deg); } }
+
+/* ---------- Wave: saluta ---------- */
+.mascot[data-state="wave"] .m-arm-r { transform: rotate(-125deg); animation: m-wave 0.42s ease-in-out infinite alternate; }
+.mascot[data-state="wave"] .m-head { transform: rotate(-4deg); animation: m-tilt 0.84s ease-in-out infinite alternate; }
+.mascot[data-state="wave"] .m-eyes,
+.mascot[data-state="wave"] .m-mouth-smile { opacity: 0; }
+.mascot[data-state="wave"] .m-eyes-happy,
+.mascot[data-state="wave"] .m-mouth-open,
+.mascot[data-state="wave"] .m-fx-wave { opacity: 1; }
+.mascot[data-state="wave"] .m-fx-wave { animation: m-flicker 0.42s steps(2, jump-none) infinite alternate; }
+
+@keyframes m-wave { from { transform: rotate(-108deg); } to { transform: rotate(-138deg); } }
+@keyframes m-tilt { from { transform: rotate(-4deg); } to { transform: rotate(3deg); } }
+@keyframes m-flicker { from { opacity: 0.25; } to { opacity: 1; } }
+
+/* ---------- Walk: passo, molleggio e braccia che oscillano ---------- */
+.mascot[data-state="walk"] .m-figure { animation: m-bob 0.26s ease-in-out infinite alternate; }
+.mascot[data-state="walk"] .m-leg-l { animation: m-step 0.52s ease-in-out infinite; }
+.mascot[data-state="walk"] .m-leg-r { animation: m-step 0.52s ease-in-out infinite -0.26s; }
+.mascot[data-state="walk"] .m-arm-l { animation: m-swing-l 0.52s ease-in-out infinite; }
+.mascot[data-state="walk"] .m-arm-r { animation: m-swing-r 0.52s ease-in-out infinite; }
+.mascot[data-state="walk"] .m-shadow { animation: m-shadow-bob 0.26s ease-in-out infinite alternate; }
+
+@keyframes m-bob { to { transform: translateY(-1.6px); } }
+@keyframes m-shadow-bob { to { transform: scaleX(0.9); } }
+@keyframes m-step {
+  0%, 50%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-3px) rotate(-7deg); }
+}
+@keyframes m-swing-l { 0%, 100% { transform: rotate(16deg); } 50% { transform: rotate(-8deg); } }
+@keyframes m-swing-r { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(-16deg); } }
+
+/* ---------- Point: indica verso destra ---------- */
+.mascot[data-state="point"] .m-arm-r { transform: rotate(-86deg); animation: m-jab 0.8s ease-in-out infinite; }
+.mascot[data-state="point"] .m-head { transform: rotate(5deg); animation: none; }
+.mascot[data-state="point"] .m-pupils { transform: translateX(1.6px); }
+.mascot[data-state="point"] .m-finger,
+.mascot[data-state="point"] .m-fx-point { opacity: 1; }
+.mascot[data-state="point"] .m-fx-point { animation: m-flicker 0.4s steps(2, jump-none) infinite alternate; }
+
+@keyframes m-jab {
+  0%, 100% { transform: rotate(-86deg) translateY(0); }
+  50% { transform: rotate(-86deg) translateY(2.4px); }
+}
+
+/* ---------- Think: mano sul mento, sguardo in alto, puntini ---------- */
+.mascot[data-state="think"] .m-arm-l { transform: rotate(-122deg); animation: none; }
+.mascot[data-state="think"] .m-head { transform: rotate(-5deg); animation: m-ponder 2.4s ease-in-out infinite; }
+.mascot[data-state="think"] .m-pupils { transform: translate(1.4px, -1.6px); }
+.mascot[data-state="think"] .m-brows { transform: translateY(-1.2px); }
+.mascot[data-state="think"] .m-mouth-smile { opacity: 0; }
+.mascot[data-state="think"] .m-mouth-flat,
+.mascot[data-state="think"] .m-fx-think { opacity: 1; }
+.mascot[data-state="think"] .m-fx-think > * { animation: m-dot 1.5s ease-in-out infinite; }
+.mascot[data-state="think"] .m-fx-think > :nth-child(2) { animation-delay: 0.2s; }
+.mascot[data-state="think"] .m-fx-think > :nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes m-ponder { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(-2deg) translateY(-0.6px); } }
+@keyframes m-dot { 0%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+/* ---------- Talk: bocca che parla e mano che gesticola ---------- */
+.mascot[data-state="talk"] .m-arm-r { transform: rotate(-40deg); animation: m-gesture 1.3s ease-in-out infinite; }
+.mascot[data-state="talk"] .m-head { animation: m-nod 0.65s ease-in-out infinite alternate; }
+.mascot[data-state="talk"] .m-mouth-open { animation: m-mouth 0.3s steps(1, end) infinite; }
+.mascot[data-state="talk"] .m-mouth-smile { animation: m-mouth 0.3s steps(1, end) infinite reverse; }
+
+@keyframes m-gesture {
+  0%, 100% { transform: rotate(-30deg); }
+  35% { transform: rotate(-62deg); }
+  65% { transform: rotate(-44deg); }
+}
+@keyframes m-nod { from { transform: translateY(0) rotate(-1deg); } to { transform: translateY(0.9px) rotate(1.5deg); } }
+@keyframes m-mouth { 0% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ---------- Celebrate: salto con le braccia al cielo ---------- */
+.mascot[data-state="celebrate"] .m-arm-l { transform: rotate(125deg); animation: m-pump-l 0.4s ease-in-out infinite alternate; }
+.mascot[data-state="celebrate"] .m-arm-r { transform: rotate(-125deg); animation: m-pump-r 0.4s ease-in-out infinite alternate; }
+.mascot[data-state="celebrate"] .m-figure { animation: m-jump 0.8s cubic-bezier(0.3, 0, 0.4, 1) infinite; }
+.mascot[data-state="celebrate"] .m-shadow { animation: m-shadow-jump 0.8s cubic-bezier(0.3, 0, 0.4, 1) infinite; }
+.mascot[data-state="celebrate"] .m-eyes,
+.mascot[data-state="celebrate"] .m-mouth-smile { opacity: 0; }
+.mascot[data-state="celebrate"] .m-eyes-happy,
+.mascot[data-state="celebrate"] .m-mouth-open,
+.mascot[data-state="celebrate"] .m-fx-spark { opacity: 1; }
+.mascot[data-state="celebrate"] .m-fx-spark > * { transform-origin: center; transform-box: fill-box; animation: m-sparkle 0.8s ease-out infinite; }
+.mascot[data-state="celebrate"] .m-fx-spark > :nth-child(2) { animation-delay: 0.25s; }
+.mascot[data-state="celebrate"] .m-fx-spark > :nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes m-pump-l { from { transform: rotate(112deg); } to { transform: rotate(138deg); } }
+@keyframes m-pump-r { from { transform: rotate(-112deg); } to { transform: rotate(-138deg); } }
+@keyframes m-jump {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  14% { transform: translateY(0) scale(1.05, 0.93); }
+  45% { transform: translateY(-8px) scale(0.97, 1.04); }
+  76% { transform: translateY(0) scale(1.04, 0.95); }
+}
+@keyframes m-shadow-jump { 45% { transform: scale(0.65); opacity: 0.15; } }
+@keyframes m-sparkle {
+  0% { transform: scale(0) rotate(0); opacity: 1; }
+  60% { transform: scale(1.1) rotate(45deg); opacity: 1; }
+  100% { transform: scale(0.6) rotate(90deg); opacity: 0; }
+}
+
+/* ---------- Sleep: testa che ciondola, occhi chiusi, Zzz ---------- */
+.mascot[data-state="sleep"] .m-head { transform: rotate(8deg) translateY(1px); animation: m-doze 4.2s ease-in-out infinite; }
+.mascot[data-state="sleep"] .m-torso { animation-duration: 4.2s; }
+.mascot[data-state="sleep"] .m-arm-l { transform: rotate(1deg); animation: none; }
+.mascot[data-state="sleep"] .m-arm-r { transform: rotate(-1deg); animation: none; }
+.mascot[data-state="sleep"] .m-eyes,
+.mascot[data-state="sleep"] .m-mouth-smile { opacity: 0; animation: none; }
+.mascot[data-state="sleep"] .m-eyes-closed,
+.mascot[data-state="sleep"] .m-mouth-o,
+.mascot[data-state="sleep"] .m-fx-zzz { opacity: 1; }
+.mascot[data-state="sleep"] .m-fx-zzz > * { animation: m-zzz 3s ease-in infinite; }
+.mascot[data-state="sleep"] .m-fx-zzz > :nth-child(2) { animation-delay: 1s; }
+.mascot[data-state="sleep"] .m-fx-zzz > :nth-child(3) { animation-delay: 2s; }
+
+@keyframes m-doze {
+  0%, 100% { transform: rotate(8deg) translateY(1px); }
+  50% { transform: rotate(11deg) translateY(1.8px); }
+}
+@keyframes m-zzz {
+  0% { transform: translate(-4px, 6px); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translate(3px, -6px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot,
+  .mascot * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

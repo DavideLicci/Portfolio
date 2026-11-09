@@ -3,6 +3,7 @@ import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { ContactForm } from "./contact-form";
 import { GithubIcon } from "./icons";
+import { MascotSpot } from "./mascot/mascot-spot";
 import { Section } from "./section";
 
 type ContactProps = {
@@ -17,6 +18,7 @@ export function Contact({ index, dict }: ContactProps) {
         <div className="reveal">
           <p className="font-mono text-3xl text-fg sm:text-4xl">{dict.heading}</p>
           <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{dict.intro}</p>
+          <MascotSpot variant="contact" className="mt-6" />
 
           <a
             href={profile.github.url}

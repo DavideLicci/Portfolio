@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { MascotProvider } from "@/components/mascot/mascot-context";
+import { MascotDock } from "@/components/mascot/mascot-dock";
 import { SpotlightTracker } from "@/components/spotlight-tracker";
 import { projects } from "@/content/projects";
 import { defaultLocale, hasLocale, locales } from "@/i18n/config";
@@ -57,8 +59,11 @@ export default async function RootLayout({
           {dict.nav.skip}
         </a>
         <Header lang={locale} dict={dict.nav} showProjects={projects.length > 0} />
-        <main id="main">{children}</main>
-        <Footer dict={dict.footer} />
+        <MascotProvider dict={dict.mascot}>
+          <main id="main">{children}</main>
+          <Footer dict={dict.footer} />
+          <MascotDock />
+        </MascotProvider>
         <SpotlightTracker />
       </body>
     </html>
