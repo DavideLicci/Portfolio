@@ -35,7 +35,7 @@ const it = {
     paragraphs: [
       "Sono Davide, uno sviluppatore software all'inizio del suo percorso. Dal 2020 al 2025 ho frequentato l'indirizzo Informatica all'I.I.S. «G. Marconi – E. Pieralisi» di Jesi.",
       "Nel 2024 ho fatto lo stage in Loccioni: ero il project manager di un banco prova per iniettori benzina e ho aiutato a sviluppare il codice C# di un sistema pick and place. Lì ho visto come il software diventa qualcosa che gira su macchine vere.",
-      "Questo sito è il punto di partenza: presto ci troverai anche i miei progetti.",
+      "Più sotto trovi i progetti a cui ho lavorato, a partire da quelli universitari.",
     ],
     facts: {
       role: "ruolo",
@@ -84,6 +84,16 @@ const it = {
     title: "Progetti",
     repo: "Codice",
     demo: "Demo",
+    readMore: "Scopri il progetto",
+    back: "Tutti i progetti",
+    grade: "Voto",
+    aboutGame: "Il gioco",
+    role: "Il mio ruolo",
+    highlights: "Dal punto di vista tecnico",
+    tech: "Tecnologie",
+    session: "Estratto di una partita",
+    sessionNote: "Output reale del gioco, catturato durante una partita. In verde i comandi digitati.",
+    gameLanguage: "",
   },
   contact: {
     title: "Contatti",

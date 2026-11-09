@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -15,6 +16,9 @@ type HeaderProps = {
 export function Header({ lang, dict, showProjects }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const otherLang: Locale = lang === "it" ? "en" : "it";
+  // Cambiando lingua resta sulla stessa pagina (es. /it/projects/x → /en/projects/x).
+  const pathname = usePathname();
+  const switchHref = pathname.replace(/^\/(it|en)(?=\/|$)/, `/${otherLang}`);
 
   // Percorsi completi, così i link funzionano anche fuori dalla home (es. dalla pagina 404).
   const home = `/${lang}`;
@@ -60,7 +64,7 @@ export function Header({ lang, dict, showProjects }: HeaderProps) {
 
         <div className="flex items-center gap-2">
           <Link
-            href={`/${otherLang}`}
+            href={switchHref.startsWith(`/${otherLang}`) ? switchHref : `/${otherLang}`}
             hrefLang={otherLang}
             className="grid min-h-11 min-w-11 place-items-center rounded-lg border border-line-strong px-3 font-mono text-xs text-fg transition-colors hover:border-accent hover:text-accent"
           >

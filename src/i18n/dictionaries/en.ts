@@ -37,7 +37,7 @@ const en: Dictionary = {
     paragraphs: [
       "I'm Davide, a software developer at the start of my career. From 2020 to 2025 I attended the Computer Science track at I.I.S. «G. Marconi – E. Pieralisi» in Jesi, Italy.",
       "In 2024 I did my internship at Loccioni: I was the project manager for a gasoline injector test bench and helped develop the C# code for a pick-and-place system. It showed me how software turns into something that runs on real machines.",
-      "This site is a starting point: my projects will be here soon too.",
+      "Further down you'll find the projects I've worked on, starting with my university ones.",
     ],
     facts: {
       role: "role",
@@ -86,6 +86,16 @@ const en: Dictionary = {
     title: "Projects",
     repo: "Code",
     demo: "Demo",
+    readMore: "See the project",
+    back: "All projects",
+    grade: "Grade",
+    aboutGame: "The game",
+    role: "My role",
+    highlights: "Under the hood",
+    tech: "Technologies",
+    session: "Excerpt from a playthrough",
+    sessionNote: "Real game output, captured during a playthrough. Typed commands are in green.",
+    gameLanguage: "The game itself is in Italian.",
   },
   contact: {
     title: "Contact",
