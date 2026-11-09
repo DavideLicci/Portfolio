@@ -34,10 +34,24 @@
 
 .mascot .m-arm-l,
 .mascot .m-arm-r,
-.mascot .m-head,
-.mascot .m-pupils,
 .mascot .m-brows {
   transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+/* Sguardo: --look-x/--look-y (da -1 a 1) li imposta useMascotGaze.
+   Usano le proprietà rotate/translate separate, così si sommano alle animazioni degli stati. */
+.mascot .m-head {
+  rotate: calc(var(--look-x, 0) * 5deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.5, 1), rotate 0.45s ease-out;
+}
+.mascot .m-pupils {
+  translate: calc(var(--look-x, 0) * 1.8px) calc(var(--look-y, 0) * 1.5px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.5, 1), translate 0.2s ease-out;
+}
+.mascot[data-state="sleep"] .m-head,
+.mascot[data-state="yawn"] .m-head,
+.mascot[data-state="look"] .m-head {
+  rotate: 0deg;
 }
 
 /* Parti alternative: compaiono solo negli stati che le usano */
@@ -192,6 +206,74 @@
   25% { opacity: 1; }
   100% { transform: translate(3px, -6px); opacity: 0; }
 }
+
+
+/* ---------- Look: si guarda intorno (comportamento spontaneo) ---------- */
+.mascot[data-state="look"] .m-head { animation: m-look-head 2.6s ease-in-out; }
+.mascot[data-state="look"] .m-pupils { animation: m-look-eyes 2.6s ease-in-out; }
+.mascot[data-state="look"] .m-pupils { translate: 0 0; }
+
+@keyframes m-look-head {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-8deg); }
+  62% { transform: rotate(8deg); }
+}
+@keyframes m-look-eyes {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  62% { transform: translateX(2px); }
+}
+
+/* ---------- Stretch: si stiracchia ---------- */
+.mascot[data-state="stretch"] .m-arm-l { transform: rotate(118deg); animation: m-stretch-l 2.4s ease-in-out; }
+.mascot[data-state="stretch"] .m-arm-r { transform: rotate(-118deg); animation: m-stretch-r 2.4s ease-in-out; }
+.mascot[data-state="stretch"] .m-torso { animation: m-stretch-body 2.4s ease-in-out; }
+.mascot[data-state="stretch"] .m-eyes,
+.mascot[data-state="stretch"] .m-mouth-smile { opacity: 0; }
+.mascot[data-state="stretch"] .m-eyes-happy,
+.mascot[data-state="stretch"] .m-mouth-o { opacity: 1; }
+
+@keyframes m-stretch-l { 0%, 100% { transform: rotate(3deg); } 30%, 75% { transform: rotate(118deg); } }
+@keyframes m-stretch-r { 0%, 100% { transform: rotate(-3deg); } 30%, 75% { transform: rotate(-118deg); } }
+@keyframes m-stretch-body { 30%, 75% { transform: scaleY(1.06); } }
+
+/* ---------- Yawn: sbadiglio con la mano davanti alla bocca ---------- */
+.mascot[data-state="yawn"] .m-arm-l { transform: rotate(-128deg); animation: m-yawn-arm 2.2s ease-in-out; }
+.mascot[data-state="yawn"] .m-head { transform: rotate(-4deg) translateY(-1px); animation: m-yawn-head 2.2s ease-in-out; }
+.mascot[data-state="yawn"] .m-eyes,
+.mascot[data-state="yawn"] .m-mouth-smile { opacity: 0; animation: none; }
+.mascot[data-state="yawn"] .m-eyes-closed,
+.mascot[data-state="yawn"] .m-mouth-o { opacity: 1; }
+.mascot[data-state="yawn"] .m-mouth-o { transform-box: view-box; transform-origin: 50px 67px; transform: scale(1.6, 2); animation: m-yawn-mouth 2.2s ease-in-out; }
+
+@keyframes m-yawn-arm { 0%, 100% { transform: rotate(3deg); } 25%, 75% { transform: rotate(-128deg); } }
+@keyframes m-yawn-head { 0%, 100% { transform: rotate(0); } 30%, 70% { transform: rotate(-4deg) translateY(-1px); } }
+@keyframes m-yawn-mouth { 0%, 100% { transform: scale(0.6); } 35%, 70% { transform: scale(1.7, 2.2); } }
+
+/* ---------- Dangle: preso con il mouse, scalcia nel vuoto ---------- */
+.mascot[data-state="dangle"] .m-leg-l { animation: m-kick 0.34s ease-in-out infinite alternate; }
+.mascot[data-state="dangle"] .m-leg-r { animation: m-kick 0.34s ease-in-out infinite alternate-reverse; }
+.mascot[data-state="dangle"] .m-arm-l { transform: rotate(42deg); animation: m-flail-l 0.3s ease-in-out infinite alternate; }
+.mascot[data-state="dangle"] .m-arm-r { transform: rotate(-42deg); animation: m-flail-r 0.3s ease-in-out infinite alternate; }
+.mascot[data-state="dangle"] .m-brows { transform: translateY(-1.6px); }
+.mascot[data-state="dangle"] .m-mouth-smile { opacity: 0; }
+.mascot[data-state="dangle"] .m-mouth-o { opacity: 1; }
+.mascot[data-state="dangle"] .m-shadow { opacity: 0.08; transform: scale(0.6); }
+
+@keyframes m-kick { from { transform: rotate(14deg); } to { transform: rotate(-14deg); } }
+@keyframes m-flail-l { from { transform: rotate(30deg); } to { transform: rotate(55deg); } }
+@keyframes m-flail-r { from { transform: rotate(-30deg); } to { transform: rotate(-55deg); } }
+
+/* ---------- Land: atterraggio schiacciato dopo la caduta ---------- */
+.mascot[data-state="land"] .m-figure { animation: m-land 0.45s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.mascot[data-state="land"] .m-shadow { animation: m-land-shadow 0.45s ease-out; }
+
+@keyframes m-land {
+  0% { transform: scale(1.14, 0.84); }
+  45% { transform: scale(0.95, 1.06); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes m-land-shadow { 0% { transform: scale(1.25); } }
 
 @media (prefers-reduced-motion: reduce) {
   .mascot,

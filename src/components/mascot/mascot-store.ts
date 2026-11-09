@@ -10,7 +10,8 @@ const HIDDEN_EVENT = "mascot:hidden-change";
 const SEEN_KEY = "mascot-seen";
 export const MASCOT_EVENT = "mascot:react";
 
-export type MascotReaction = "celebrate";
+// celebrate: messaggio inviato · form-focus: si inizia a scrivere · form-error: campi da correggere
+export type MascotReaction = "celebrate" | "form-focus" | "form-error";
 
 function subscribeHidden(callback: () => void) {
   window.addEventListener(HIDDEN_EVENT, callback);

@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type Ref } from "react";
 import "./mascot.css";
 
 export type MascotState =
@@ -9,11 +9,17 @@ export type MascotState =
   | "think"
   | "talk"
   | "celebrate"
-  | "sleep";
+  | "sleep"
+  | "look"
+  | "stretch"
+  | "yawn"
+  | "dangle"
+  | "land";
 
 type MascotFigureProps = {
   state: MascotState;
   className?: string;
+  ref?: Ref<SVGSVGElement>;
 };
 
 const INK = "#241c18";
@@ -27,11 +33,12 @@ const METAL = "#aab0b6";
 // Mini Davide: un rig 2D in SVG. Ogni parte (testa, braccia, gambe, occhi, bocche)
 // è un gruppo con il proprio perno; le animazioni stanno in mascot.css e partono
 // da data-state. Coordinate nel viewBox 100×140, piedi a y≈128.
-export function MascotFigure({ state, className }: MascotFigureProps) {
+export function MascotFigure({ state, className, ref }: MascotFigureProps) {
   const filterId = `mascot-ink-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   return (
     <svg
+      ref={ref}
       viewBox="0 0 100 140"
       className={`mascot ${className ?? ""}`}
       data-state={state}

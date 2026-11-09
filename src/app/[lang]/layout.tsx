@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { MascotProvider } from "@/components/mascot/mascot-context";
 import { MascotDock } from "@/components/mascot/mascot-dock";
 import { SpotlightTracker } from "@/components/spotlight-tracker";
+import { certifications } from "@/content/certifications";
 import { projects } from "@/content/projects";
 import { defaultLocale, hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -58,8 +59,13 @@ export default async function RootLayout({
         >
           {dict.nav.skip}
         </a>
-        <Header lang={locale} dict={dict.nav} showProjects={projects.length > 0} />
-        <MascotProvider dict={dict.mascot}>
+        <Header
+          lang={locale}
+          dict={dict.nav}
+          showProjects={projects.length > 0}
+          showCertifications={certifications.length > 0}
+        />
+        <MascotProvider dict={dict.mascot} lang={locale}>
           <main id="main">{children}</main>
           <Footer dict={dict.footer} />
           <MascotDock />

@@ -19,6 +19,7 @@ Apri http://localhost:3000: ti porta su `/it` o `/en` in base alla lingua del br
 | Testi in italiano | `src/i18n/dictionaries/it.ts` |
 | Testi in inglese | `src/i18n/dictionaries/en.ts` |
 | Progetti (la sezione compare quando la lista non è vuota) | `src/content/projects.ts` |
+| Certificazioni (idem: vuota = nascosta, anche nel menu) | `src/content/certifications.ts` |
 | Colori e animazioni | `src/app/globals.css` |
 
 **Foto profilo:** salva l'immagine in `public/` (es. `public/profile.jpg`) e in `src/content/profile.ts` imposta `photo: "/profile.jpg"`.
@@ -39,15 +40,19 @@ Un personaggio 2D in SVG con parti articolate (testa, braccia, gambe, occhi, boc
 | --- | --- |
 | Disegno del personaggio | `mascot-figure.tsx` |
 | Animazioni degli 8 stati (idle, wave, walk, point, think, talk, celebrate, sleep) | `mascot.css` |
-| Stato, messaggi, sonnellino dopo 45 s di inattività | `use-mascot-actor.ts` |
-| Desktop ≥ 1400 px: fissa nel margine sinistro, reagisce alle sezioni | `mascot-dock.tsx` |
+| Stato, messaggi, comportamenti spontanei (si guarda intorno, si stiracchia, sbadiglia), sonnellino dopo 45 s | `use-mascot-actor.ts` |
+| Sguardo che segue mouse, focus, tocchi e scroll | `use-mascot-gaze.ts` |
+| Desktop ≥ 1400 px: nel margine sinistro, reagisce alle sezioni, si trascina (cade con la gravità) e si inclina se scorri veloce | `mascot-dock.tsx` |
 | Sotto i 1400 px: dentro la pagina (Home, Progetti, Contatti) | `mascot-spot.tsx` |
-| Testi delle nuvolette | `mascot` nei dizionari |
+| Testi delle nuvolette e della guida | `mascot` nei dizionari |
+| Guida: argomenti e parole chiave riconosciute | `guide-intents.ts` |
+| Guida: pannello con domande, pulsanti rapidi e navigazione | `mascot-guide.tsx` |
 
-- Ogni messaggio contestuale compare una volta per sessione; cliccando la mascotte risponde.
+- Ogni messaggio contestuale compare una volta per sessione.
+- Cliccando la mascotte si apre la guida: capisce la domanda dalle parole chiave (IT/EN), risponde con frasi fisse e porta alla sezione o pagina giusta. Per insegnarle un argomento nuovo: aggiungi l'intento in `guide-intents.ts` e la risposta nei dizionari.
 - Si nasconde dal pulsante × (desktop) o dal footer; la scelta resta salvata nel browser.
 - Con "riduci movimento" attivo le animazioni si fermano e restano le pose.
-- Per farla reagire da un altro componente: `emitMascot("celebrate")` da `mascot-store.ts`.
+- Per farla reagire da un altro componente: `emitMascot("celebrate" | "form-focus" | "form-error")` da `mascot-store.ts`.
 
 ## Pubblicazione
 

@@ -11,9 +11,10 @@ type HeaderProps = {
   lang: Locale;
   dict: Dictionary["nav"];
   showProjects: boolean;
+  showCertifications: boolean;
 };
 
-export function Header({ lang, dict, showProjects }: HeaderProps) {
+export function Header({ lang, dict, showProjects, showCertifications }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const otherLang: Locale = lang === "it" ? "en" : "it";
   // Cambiando lingua resta sulla stessa pagina (es. /it/projects/x → /en/projects/x).
@@ -26,6 +27,7 @@ export function Header({ lang, dict, showProjects }: HeaderProps) {
     { href: `${home}#about`, label: dict.about },
     { href: `${home}#skills`, label: dict.skills },
     { href: `${home}#journey`, label: dict.journey },
+    ...(showCertifications ? [{ href: `${home}#certifications`, label: dict.certifications }] : []),
     ...(showProjects ? [{ href: `${home}#projects`, label: dict.projects }] : []),
     { href: `${home}#contact`, label: dict.contact },
   ];

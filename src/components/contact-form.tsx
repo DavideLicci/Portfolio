@@ -44,6 +44,7 @@ export function ContactForm({ dict }: { dict: FormDict }) {
 
     const firstInvalid = FIELDS.filter((field) => !validate(field, values[field]))[0];
     if (firstInvalid) {
+      emitMascot("form-error");
       (form.elements.namedItem(firstInvalid) as HTMLElement | null)?.focus();
       return;
     }
@@ -95,6 +96,7 @@ export function ContactForm({ dict }: { dict: FormDict }) {
       noValidate
       data-spotlight
       onSubmit={handleSubmit}
+      onFocus={() => emitMascot("form-focus")}
       className="space-y-5 rounded-xl border border-line bg-surface p-5 sm:p-7"
     >
       <TextField

@@ -1,19 +1,36 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 type MascotDict = Dictionary["mascot"];
 
-const MascotContext = createContext<MascotDict | null>(null);
+const MascotContext = createContext<{ dict: MascotDict; lang: Locale } | null>(null);
 
-// Passa i testi della mascotte a tutte le sue istanze (dock, spazi in pagina, interruttore).
-export function MascotProvider({ dict, children }: { dict: MascotDict; children: ReactNode }) {
-  return <MascotContext.Provider value={dict}>{children}</MascotContext.Provider>;
+// Passa testi e lingua a tutte le istanze della mascotte (dock, spazi in pagina, guida, interruttore).
+export function MascotProvider({
+  dict,
+  lang,
+  children,
+}: {
+  dict: MascotDict;
+  lang: Locale;
+  children: ReactNode;
+}) {
+  return <MascotContext.Provider value={{ dict, lang }}>{children}</MascotContext.Provider>;
+}
+
+function useMascotContext() {
+  const value = useContext(MascotContext);
+  if (!value) throw new Error("La mascotte va usata dentro <MascotProvider>");
+  return value;
 }
 
 export function useMascotDict() {
-  const dict = useContext(MascotContext);
-  if (!dict) throw new Error("useMascotDict va usato dentro <MascotProvider>");
-  return dict;
+  return useMascotContext().dict;
+}
+
+export function useMascotLang() {
+  return useMascotContext().lang;
 }
