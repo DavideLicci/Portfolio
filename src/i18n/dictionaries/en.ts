@@ -2,9 +2,9 @@ import type { Dictionary } from "./it";
 
 const en: Dictionary = {
   meta: {
-    title: "Davide Licci — Junior Software Developer",
+    title: "Davide Licci — Software developer · simulation & XR",
     description:
-      "Portfolio of Davide Licci, junior software developer: skills, background and contact.",
+      "Portfolio of Davide Licci, Information Engineering for Video Games and Virtual Reality student: projects, skills, background and contact.",
   },
   nav: {
     skip: "Skip to content",
@@ -21,13 +21,15 @@ const en: Dictionary = {
   },
   hero: {
     greeting: "Hi, I'm",
+    role: "Software developer · simulation & XR",
     tagline:
-      "I write code in Python, C#, C, Java and PHP. I studied Computer Science in Jesi, Italy, and at Loccioni I managed the project for a fuel injector test bench.",
+      "I study Information Engineering for Video Games and Virtual Reality and build games, simulations and apps with Unity, Godot and Flutter. At Loccioni I managed the project for a fuel injector test bench.",
     ctaContact: "Get in touch",
     ctaGithub: "GitHub",
+    ctaCv: "CV",
     photoAlt: "Photo of Davide Licci",
     chipWork: "Intern @ Loccioni",
-    chipSchool: "ITIS Computer Science",
+    chipSchool: "Games & VR engineering",
   },
   marquee: {
     pause: "Pause the technologies ticker",
@@ -36,14 +38,14 @@ const en: Dictionary = {
   about: {
     title: "About",
     paragraphs: [
-      "I'm Davide, a software developer at the start of my career. From 2020 to 2025 I attended the Computer Science track at I.I.S. «G. Marconi – E. Pieralisi» in Jesi, Italy.",
+      "I'm Davide, and since 2025 I've been studying Information Engineering for Video Games and Virtual Reality at the Polytechnic University of Marche. Before that I attended the Computer Science track at I.I.S. «G. Marconi – E. Pieralisi» in Jesi, Italy.",
       "In 2024 I did my internship at Loccioni: I was the project manager for a gasoline injector test bench and helped develop the C# code for a pick-and-place system. It showed me how software turns into something that runs on real machines.",
-      "Further down you'll find the projects I've worked on, starting with my university ones.",
+      "I'm into simulation, virtual reality and serious games, especially when they serve a real purpose, like training people who work on a machine. Further down you'll find the projects I've worked on.",
     ],
     facts: {
       role: "role",
       education: "education",
-      educationValue: "Computer Science · 2020–2025",
+      educationValue: "Games & VR engineering · UNIVPM",
       experience: "experience",
       experienceValue: "Loccioni · 2024",
       github: "github",
@@ -56,15 +58,23 @@ const en: Dictionary = {
   },
   skills: {
     title: "Skills",
-    intro: "The languages and tools I work with.",
+    intro: "The languages, engines and tools I work with.",
     groups: {
       languages: "Languages",
+      engines: "Engines & 3D",
+      apps: "Apps & backend",
       webAndData: "Web & databases",
       tools: "Tools",
     },
   },
   journey: {
     title: "Journey",
+    university: {
+      period: "2025 – present",
+      org: "Polytechnic University of Marche",
+      role: "Information Engineering for Video Games and Virtual Reality",
+      points: ["Object-Oriented Programming: 28/30, with the game “Oltre il tempo”."],
+    },
     work: {
       period: "2024",
       org: "Loccioni",
@@ -98,6 +108,8 @@ const en: Dictionary = {
     role: "My role",
     highlights: "Under the hood",
     tech: "Technologies",
+    tryDemo: "Try it online",
+    screens: "Screenshots",
     session: "Excerpt from a playthrough",
     sessionNote: "Real game output, captured during a playthrough. Typed commands are in green.",
     gameLanguage: "The game itself is in Italian.",
@@ -108,6 +120,8 @@ const en: Dictionary = {
     intro:
       "Got a question, an idea or just want to say hi? Fill in the form and your message lands straight in my inbox.",
     githubCta: "See my GitHub",
+    cvTitle: "Curriculum vitae",
+    cvCta: "Read it online or download the PDF",
     form: {
       name: "Name",
       namePlaceholder: "Jane Smith",
@@ -133,9 +147,9 @@ const en: Dictionary = {
     hide: "Hide the mascot",
     show: "Show the mascot",
     welcome: "Hi! I'm Davide, the mini version.",
-    journey: "Here's my internship at Loccioni.",
-    projects: "This game got me a 28/30 in my OOP exam.",
-    projectHover: "Open it: there's a real playthrough inside.",
+    journey: "University, the Loccioni internship and ITIS: all here.",
+    projects: "A game for an exam and a complete app: take your pick.",
+    projectHover: "Open it to see how it works inside.",
     session: "This is the game's real output.",
     contact: "Go ahead and write: it really reaches me.",
     sent: "Got it! Thanks for your message.",
@@ -155,9 +169,11 @@ const en: Dictionary = {
       intro: "Hi! What would you like to see? Type it or pick a topic.",
       fallback: "I didn't quite get that. Try one of these topics:",
       openLink: "Open GitHub",
+      openCv: "Download the CV",
       chips: {
         projects: "Projects",
         game: "The game",
+        app: "The app",
         skills: "Skills",
         journey: "Journey",
         certifications: "Certifications",
@@ -168,18 +184,45 @@ const en: Dictionary = {
         help: "Tell me what you're interested in, in your own words, and I'll take you there.",
         about: "Here's who I am, in short.",
         skills: "Here are the languages and tools I work with.",
-        journey: "Taking you to my journey: ITIS and the Loccioni internship.",
+        journey: "Taking you to my journey: university, the Loccioni internship and ITIS.",
         certifications: "Here are my certifications.",
         certificationsEmpty: "My certifications are on their way: that section isn't online yet.",
         projects: "Let's go to the projects!",
         game: "Taking you to “Oltre il tempo”, my OOP exam game.",
+        app: "Taking you to Called It!, my app for predictions among friends.",
         contact: "Taking you to the form: your message reaches me directly.",
         github: "My code is on GitHub:",
-        cv: "My CV isn't on the site yet: ask me for it through the contact form.",
+        cv: "Here's my CV, as a PDF:",
         language: "Passo all'italiano!",
         hide: "Okay, I'll hide. You'll find me again in the footer.",
       },
     },
+  },
+  cv: {
+    metaTitle: "Curriculum vitae — Davide Licci",
+    metaDescription: "Davide Licci's CV: education, experience, projects and skills.",
+    download: "Download the PDF",
+    back: "Back to the portfolio",
+    heading: "Curriculum vitae",
+    birth: "Born on",
+    sections: {
+      contacts: "Contact",
+      profile: "Profile",
+      education: "Education",
+      experience: "Experience",
+      projects: "Projects",
+      skills: "Skills",
+      languages: "Languages",
+      certifications: "Certifications",
+    },
+    profile:
+      "Information Engineering for Video Games and Virtual Reality student at the Polytechnic University of Marche. I build games, simulations and apps with Unity, Godot and Flutter. During my internship at Loccioni I coordinated the project for a gasoline injector test bench and contributed to the C# code of a pick-and-place system. I'm interested in industrial simulation, virtual reality training and serious games.",
+    diploma: "Technical high school diploma · Computer Science track",
+    languages: [
+      { name: "Italian", level: "Native" },
+      { name: "English", level: "B2" },
+    ],
+    consent: "I authorise the processing of the personal data in this CV in accordance with Regulation (EU) 2016/679 (GDPR).",
   },
   footer: {
     madeWith: "Built with Next.js and Tailwind CSS",

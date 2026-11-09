@@ -1,8 +1,10 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { primaryButton } from "@/components/buttons";
 import { CountUp } from "@/components/count-up";
+import { PhoneScreen } from "@/components/phone-screen";
 import { ProjectSession } from "@/components/project-session";
 import { getProject, projects } from "@/content/projects";
 import { hasLocale } from "@/i18n/config";
@@ -70,6 +72,17 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
               {project.team[lang]}
             </li>
           </ul>
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${primaryButton} mt-7`}
+            >
+              {dict.tryDemo}
+              <ArrowUpRight className="size-4" aria-hidden />
+            </a>
+          )}
         </header>
 
         <ul className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
@@ -141,6 +154,27 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
             </ul>
           </section>
         </div>
+
+        {project.images && (
+          <section className="reveal mt-20" aria-labelledby="screens">
+            <h2 id="screens" className="font-mono text-xl text-fg">
+              <span className="text-accent">## </span>
+              {dict.screens}
+            </h2>
+            <ul className="mt-6 grid grid-cols-2 gap-5 sm:gap-8 lg:grid-cols-4">
+              {project.images.map((image) => (
+                <li key={image.src}>
+                  <PhoneScreen
+                    src={image.src}
+                    alt={image.alt[lang]}
+                    sizes="(min-width: 1024px) 230px, 45vw"
+                  />
+                  <p className="mt-3 text-center text-sm text-muted">{image.alt[lang]}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {project.session && (
           <section className="reveal mt-20" aria-labelledby="session">

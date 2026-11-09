@@ -4,6 +4,7 @@ import { projects } from "@/content/projects";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { MascotSpot } from "./mascot/mascot-spot";
+import { PhoneScreen } from "./phone-screen";
 import { ProjectSession } from "./project-session";
 import { Section } from "./section";
 
@@ -22,8 +23,9 @@ export function Projects({ index, lang, dict }: ProjectsProps) {
       <MascotSpot variant="projects" className="mb-8" />
       <ul className="space-y-6">
         {projects.map((project) => {
-          // Nella card basta un pezzo di partita: dalla telefonata in poi.
-          const preview = project.session?.slice(-4);
+          // Nella card basta un assaggio: due schermate dell'app o un pezzo di partita.
+          const screens = project.images?.slice(0, 2);
+          const preview = screens ? undefined : project.session?.slice(-4);
 
           return (
             <li
@@ -73,6 +75,25 @@ export function Projects({ index, lang, dict }: ProjectsProps) {
                   />
                 </p>
               </div>
+
+              {screens && (
+                <div aria-hidden className="relative mx-auto flex h-72 w-full max-w-sm items-start justify-center sm:h-80">
+                  <PhoneScreen
+                    src={screens[0].src}
+                    alt=""
+                    sizes="180px"
+                    className="relative z-10 w-36 -rotate-3 transition-transform duration-300 group-hover:-translate-y-1 group-hover:-rotate-6 sm:w-40"
+                  />
+                  {screens[1] && (
+                    <PhoneScreen
+                      src={screens[1].src}
+                      alt=""
+                      sizes="180px"
+                      className="mt-8 -ml-6 w-36 rotate-3 transition-transform duration-300 group-hover:rotate-6 sm:w-40"
+                    />
+                  )}
+                </div>
+              )}
 
               {preview && (
                 <div aria-hidden className="relative">

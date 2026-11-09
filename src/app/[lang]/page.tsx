@@ -26,14 +26,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      <Hero dict={dict.hero} />
+      <Hero lang={lang} dict={dict.hero} />
       <TechMarquee items={technologies.map((tech) => tech.name)} dict={dict.marquee} />
-      <About index="01" dict={dict.about} />
+      <About index="01" role={dict.hero.role} dict={dict.about} />
       <Skills index="02" dict={dict.skills} />
       <Journey index="03" dict={dict.journey} />
       <Certifications index={certificationsIndex} lang={lang} dict={dict.certifications} />
       <Projects index={projectsIndex} lang={lang} dict={dict.projects} />
-      <Contact index={contactIndex} dict={dict.contact} />
+      <Contact index={contactIndex} lang={lang} dict={dict.contact} />
     </>
   );
 }

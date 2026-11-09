@@ -1,8 +1,8 @@
 const it = {
   meta: {
-    title: "Davide Licci — Junior Software Developer",
+    title: "Davide Licci — Software developer · simulazione e XR",
     description:
-      "Portfolio di Davide Licci, sviluppatore software junior: competenze, percorso e contatti.",
+      "Portfolio di Davide Licci, studente di Ingegneria dell'informazione per videogiochi e realtà virtuale: progetti, competenze, percorso e contatti.",
   },
   nav: {
     skip: "Vai al contenuto",
@@ -19,13 +19,15 @@ const it = {
   },
   hero: {
     greeting: "Ciao, sono",
+    role: "Software developer · simulazione e XR",
     tagline:
-      "Scrivo codice in Python, C#, C, Java e PHP. Ho studiato Informatica a Jesi e in Loccioni ho guidato il progetto di un banco prova per iniettori.",
+      "Studio Ingegneria dell'informazione per videogiochi e realtà virtuale e costruisco giochi, simulazioni e app con Unity, Godot e Flutter. In Loccioni ho guidato il progetto di un banco prova per iniettori.",
     ctaContact: "Contattami",
     ctaGithub: "GitHub",
+    ctaCv: "CV",
     photoAlt: "Foto di Davide Licci",
     chipWork: "Stage @ Loccioni",
-    chipSchool: "ITIS Informatica",
+    chipSchool: "Ing. videogiochi e VR",
   },
   marquee: {
     pause: "Ferma il nastro delle tecnologie",
@@ -34,14 +36,14 @@ const it = {
   about: {
     title: "Chi sono",
     paragraphs: [
-      "Sono Davide, uno sviluppatore software all'inizio del suo percorso. Dal 2020 al 2025 ho frequentato l'indirizzo Informatica all'I.I.S. «G. Marconi – E. Pieralisi» di Jesi.",
+      "Sono Davide e dal 2025 studio Ingegneria dell'informazione per videogiochi e realtà virtuale all'Università Politecnica delle Marche. Prima ho frequentato l'indirizzo Informatica all'I.I.S. «G. Marconi – E. Pieralisi» di Jesi.",
       "Nel 2024 ho fatto lo stage in Loccioni: ero il project manager di un banco prova per iniettori benzina e ho aiutato a sviluppare il codice C# di un sistema pick and place. Lì ho visto come il software diventa qualcosa che gira su macchine vere.",
-      "Più sotto trovi i progetti a cui ho lavorato, a partire da quelli universitari.",
+      "Mi interessano la simulazione, la realtà virtuale e i serious game, soprattutto quando servono a qualcosa di concreto, come formare chi lavora su un macchinario. Più sotto trovi i progetti a cui ho lavorato.",
     ],
     facts: {
       role: "ruolo",
       education: "formazione",
-      educationValue: "Informatica · 2020–2025",
+      educationValue: "Ing. videogiochi e VR · UNIVPM",
       experience: "esperienza",
       experienceValue: "Loccioni · 2024",
       github: "github",
@@ -54,15 +56,23 @@ const it = {
   },
   skills: {
     title: "Competenze",
-    intro: "I linguaggi e gli strumenti con cui lavoro.",
+    intro: "I linguaggi, i motori e gli strumenti con cui lavoro.",
     groups: {
       languages: "Linguaggi",
+      engines: "Motori e 3D",
+      apps: "App e backend",
       webAndData: "Web e database",
       tools: "Strumenti",
     },
   },
   journey: {
     title: "Percorso",
+    university: {
+      period: "2025 – in corso",
+      org: "Università Politecnica delle Marche",
+      role: "Ingegneria dell'informazione per videogiochi e realtà virtuale",
+      points: ["Programmazione a oggetti: 28/30, con il gioco «Oltre il tempo»."],
+    },
     work: {
       period: "2024",
       org: "Loccioni",
@@ -96,6 +106,8 @@ const it = {
     role: "Il mio ruolo",
     highlights: "Dal punto di vista tecnico",
     tech: "Tecnologie",
+    tryDemo: "Prova la versione online",
+    screens: "Schermate",
     session: "Estratto di una partita",
     sessionNote: "Output reale del gioco, catturato durante una partita. In verde i comandi digitati.",
     gameLanguage: "",
@@ -106,6 +118,8 @@ const it = {
     intro:
       "Hai una domanda, una proposta o vuoi solo salutarmi? Compila il modulo: il messaggio arriva direttamente nella mia casella di posta.",
     githubCta: "Guarda il mio GitHub",
+    cvTitle: "Curriculum vitae",
+    cvCta: "Leggilo online o scaricalo in PDF",
     form: {
       name: "Nome",
       namePlaceholder: "Mario Rossi",
@@ -131,9 +145,9 @@ const it = {
     hide: "Nascondi la mascotte",
     show: "Mostra la mascotte",
     welcome: "Ciao! Sono Davide, in versione mini.",
-    journey: "Qui c'è il mio stage in Loccioni.",
-    projects: "Questo gioco mi è valso un 28 all'esame di OOP.",
-    projectHover: "Aprilo: c'è un pezzo di partita vera.",
+    journey: "Università, stage in Loccioni e ITIS: eccoli qui.",
+    projects: "Un gioco per l'esame e un'app completa: scegli tu.",
+    projectHover: "Aprilo per vedere com'è fatto dentro.",
     session: "Questo è l'output vero del gioco.",
     contact: "Scrivimi pure: il messaggio arriva davvero a me.",
     sent: "Ricevuto! Grazie del messaggio.",
@@ -153,9 +167,11 @@ const it = {
       intro: "Ciao! Cosa vuoi vedere? Scrivimelo o scegli un argomento.",
       fallback: "Non ho capito bene. Prova con uno di questi argomenti:",
       openLink: "Apri GitHub",
+      openCv: "Scarica il CV",
       chips: {
         projects: "Progetti",
         game: "Il gioco",
+        app: "L'app",
         skills: "Competenze",
         journey: "Percorso",
         certifications: "Certificazioni",
@@ -166,18 +182,46 @@ const it = {
         help: "Scrivimi cosa ti interessa, anche a parole tue, e ti porto nel punto giusto.",
         about: "Ecco chi sono, in breve.",
         skills: "Ecco linguaggi e strumenti con cui lavoro.",
-        journey: "Ti porto al mio percorso: ITIS e stage in Loccioni.",
+        journey: "Ti porto al mio percorso: università, stage in Loccioni e ITIS.",
         certifications: "Ecco le mie certificazioni.",
         certificationsEmpty: "Le certificazioni stanno arrivando: la sezione non è ancora online.",
         projects: "Andiamo ai progetti!",
         game: "Ti porto su «Oltre il tempo», il gioco dell'esame di OOP.",
+        app: "Ti porto su Called It!, la mia app di previsioni tra amici.",
         contact: "Ti porto al modulo: il messaggio arriva direttamente a me.",
         github: "Il mio codice è su GitHub:",
-        cv: "Il CV non è ancora sul sito: chiedimelo dal modulo contatti.",
+        cv: "Ecco il mio CV, da scaricare in PDF:",
         language: "Switching to English!",
         hide: "Va bene, mi nascondo. Mi ritrovi nel footer.",
       },
     },
+  },
+  cv: {
+    metaTitle: "Curriculum vitae — Davide Licci",
+    metaDescription: "Il curriculum di Davide Licci: istruzione, esperienza, progetti e competenze.",
+    download: "Scarica il PDF",
+    back: "Torna al portfolio",
+    heading: "Curriculum vitae",
+    birth: "Nato il",
+    sections: {
+      contacts: "Contatti",
+      profile: "Profilo",
+      education: "Istruzione",
+      experience: "Esperienza",
+      projects: "Progetti",
+      skills: "Competenze",
+      languages: "Lingue",
+      certifications: "Certificazioni",
+    },
+    profile:
+      "Studente di Ingegneria dell'informazione per videogiochi e realtà virtuale all'Università Politecnica delle Marche. Sviluppo giochi, simulazioni e app con Unity, Godot e Flutter. Nello stage in Loccioni ho coordinato il progetto di un banco prova per iniettori benzina e contribuito al codice C# di un sistema pick and place. Mi interessano la simulazione industriale, il training in realtà virtuale e i serious game.",
+    diploma: "Diploma di istituto tecnico · indirizzo Informatica",
+    languages: [
+      { name: "Italiano", level: "Madrelingua" },
+      { name: "Inglese", level: "B2" },
+    ],
+    consent:
+      "Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae ai sensi del D.Lgs. 196/2003 e del Regolamento UE 2016/679 (GDPR).",
   },
   footer: {
     madeWith: "Fatto con Next.js e Tailwind CSS",

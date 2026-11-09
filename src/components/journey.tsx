@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, type LucideIcon } from "lucide-react";
+import { Briefcase, GraduationCap, School, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Section } from "./section";
@@ -9,23 +9,17 @@ type JourneyProps = {
 };
 
 export function Journey({ index, dict }: JourneyProps) {
-  const { work, school } = dict;
+  const { university, work, school } = dict;
 
   return (
     <Section id="journey" index={index} title={dict.title}>
       <ol>
+        <Step icon={GraduationCap} period={university.period} role={university.role} org={university.org}>
+          <Points items={university.points} />
+        </Step>
         <Step icon={Briefcase} period={work.period} role={work.role} org={work.org}>
           <p className="mt-1 text-sm text-muted">{work.schedule}</p>
-          <ul className="mt-4 space-y-2 text-base text-muted">
-            {work.points.map((point) => (
-              <li key={point} className="flex gap-3">
-                <span aria-hidden className="font-mono text-accent">
-                  ▹
-                </span>
-                {point}
-              </li>
-            ))}
-          </ul>
+          <Points items={work.points} />
           <ul className="mt-5 flex flex-wrap gap-2">
             {work.tags.map((tag) => (
               <li
@@ -37,9 +31,24 @@ export function Journey({ index, dict }: JourneyProps) {
             ))}
           </ul>
         </Step>
-        <Step icon={GraduationCap} period={school.period} role={school.role} org={school.org} last />
+        <Step icon={School} period={school.period} role={school.role} org={school.org} last />
       </ol>
     </Section>
+  );
+}
+
+function Points({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-4 space-y-2 text-base text-muted">
+      {items.map((point) => (
+        <li key={point} className="flex gap-3">
+          <span aria-hidden className="font-mono text-accent">
+            ▹
+          </span>
+          {point}
+        </li>
+      ))}
+    </ul>
   );
 }
 

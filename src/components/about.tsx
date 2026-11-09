@@ -5,12 +5,13 @@ import { Section } from "./section";
 
 type AboutProps = {
   index: string;
+  role: string;
   dict: Dictionary["about"];
 };
 
-export function About({ index, dict }: AboutProps) {
+export function About({ index, role, dict }: AboutProps) {
   const facts = [
-    [dict.facts.role, profile.role],
+    [dict.facts.role, role],
     [dict.facts.education, dict.facts.educationValue],
     [dict.facts.experience, dict.facts.experienceValue],
     [dict.facts.github, `@${profile.github.username}`],

@@ -13,6 +13,7 @@ export type GuideIntent =
   | "certifications"
   | "projects"
   | "game"
+  | "app"
   | "contact"
   | "github"
   | "cv"
@@ -24,6 +25,7 @@ export type GuideTarget =
   | { kind: "section"; id: string }
   | { kind: "page"; path: string }
   | { kind: "external"; url: string }
+  | { kind: "cv" }
   | { kind: "switch-language" }
   | { kind: "hide" }
   | { kind: "none" };
@@ -35,7 +37,12 @@ type IntentDefinition = {
   target: () => GuideTarget;
 };
 
-const firstProject = projects[0];
+// Pagina del progetto, oppure la sezione Progetti se quel progetto non c'è più.
+function projectPage(slug: string): GuideTarget {
+  return projects.some((project) => project.slug === slug)
+    ? { kind: "page", path: `/projects/${slug}` }
+    : { kind: "section", id: "projects" };
+}
 
 export const INTENTS: Record<GuideIntent, IntentDefinition> = {
   greeting: {
@@ -59,7 +66,7 @@ export const INTENTS: Record<GuideIntent, IntentDefinition> = {
     target: () => ({ kind: "section", id: "skills" }),
   },
   journey: {
-    keywords: ["percorso", "esperienza", "esperienze", "stage", "tirocinio", "loccioni", "scuola", "itis", "marconi", "pieralisi", "studi", "studiato", "formazione", "diploma", "experience", "internship", "school", "education", "study", "studies", "studied", "background", "pick and place", "iniettori"],
+    keywords: ["percorso", "esperienza", "esperienze", "stage", "tirocinio", "loccioni", "scuola", "itis", "marconi", "pieralisi", "studi", "studia", "studio", "studiare", "studiato", "formazione", "diploma", "experience", "internship", "school", "education", "study", "studies", "studied", "background", "pick and place", "iniettori", "universita", "univpm", "politecnica", "laurea", "ingegneria", "corso di laurea", "university", "degree", "engineering"],
     priority: 3,
     target: () => ({ kind: "section", id: "journey" }),
   },
@@ -71,15 +78,19 @@ export const INTENTS: Record<GuideIntent, IntentDefinition> = {
   },
   projects: {
     // Niente parole generiche come "fatto" o "made": rubavano domande tipo "dove ha fatto lo stage?".
-    keywords: ["progetti", "progetto", "lavori", "portfolio", "universita", "univpm", "esame", "esami", "projects", "project", "university", "exam"],
+    keywords: ["progetti", "progetto", "lavori", "portfolio", "esame", "esami", "projects", "project", "exam"],
     priority: 4,
     target: () => ({ kind: "section", id: "projects" }),
   },
   game: {
     keywords: ["gioco", "giochi", "videogioco", "oltre il tempo", "detective", "avventura", "testuale", "oop", "oggetti", "28", "game", "games", "text adventure", "beyond time"],
     priority: 5,
-    target: () =>
-      firstProject ? { kind: "page", path: `/projects/${firstProject.slug}` } : { kind: "section", id: "projects" },
+    target: () => projectPage("oltre-il-tempo"),
+  },
+  app: {
+    keywords: ["app", "applicazione", "applicazioni", "called it", "calledit", "flutter", "supabase", "previsioni", "scommesse", "mobile", "android", "prediction", "predictions"],
+    priority: 5,
+    target: () => projectPage("called-it"),
   },
   contact: {
     keywords: ["contatti", "contatto", "contattare", "contattarlo", "contattarti", "scrivere", "scrivergli", "scriverti", "email", "mail", "messaggio", "assumere", "assumerti", "collaborare", "parlare", "contact", "reach", "hire", "write", "message", "talk to"],
@@ -94,7 +105,7 @@ export const INTENTS: Record<GuideIntent, IntentDefinition> = {
   cv: {
     keywords: ["cv", "curriculum", "resume", "pdf"],
     priority: 6,
-    target: () => ({ kind: "section", id: "contact" }),
+    target: () => ({ kind: "cv" }),
   },
   language: {
     keywords: ["inglese", "english", "italiano", "italian", "lingua", "language", "traduci", "translate"],

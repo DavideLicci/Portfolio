@@ -15,7 +15,7 @@ import { useMascotDict, useMascotLang } from "./mascot-context";
 import type { MascotState } from "./mascot-figure";
 import { useMascotHidden } from "./mascot-store";
 
-type LogEntry = { from: "bot" | "user"; text: string; link?: string };
+type LogEntry = { from: "bot" | "user"; text: string; link?: { href: string; label: string } };
 
 type MascotGuideProps = {
   id: string;
@@ -25,7 +25,7 @@ type MascotGuideProps = {
   onReact: (state: MascotState) => void;
 };
 
-const CHIP_INTENTS = ["projects", "game", "skills", "journey", "certifications", "contact"] as const;
+const CHIP_INTENTS = ["projects", "game", "app", "skills", "journey", "certifications", "contact"] as const;
 const NAVIGATE_DELAY_MS = 700;
 
 // La guida: capisce la domanda con le parole chiave di guide-intents.ts,
@@ -43,7 +43,9 @@ export function MascotGuide({ id, variant, onClose, onReact }: MascotGuideProps)
   const panelRef = useRef<HTMLDivElement>(null);
 
   const chips = CHIP_INTENTS.filter(
-    (intent) => (intent !== "certifications" || hasCertifications) && (intent !== "game" || hasProjects),
+    (intent) =>
+      (intent !== "certifications" || hasCertifications) &&
+      ((intent !== "game" && intent !== "app") || hasProjects),
   );
 
   useEffect(() => {
@@ -117,11 +119,16 @@ export function MascotGuide({ id, variant, onClose, onReact }: MascotGuideProps)
     entries.push({
       from: "bot",
       text,
-      link: target.kind === "external" ? target.url : undefined,
+      link:
+        target.kind === "external"
+          ? { href: target.url, label: dict.openLink }
+          : target.kind === "cv"
+            ? { href: `/cv/davide-licci-cv-${lang}.pdf`, label: dict.openCv }
+            : undefined,
     });
     setLog((current) => [...current, ...entries].slice(-8));
 
-    if (target.kind === "none" || target.kind === "external") {
+    if (target.kind === "none" || target.kind === "external" || target.kind === "cv") {
       onReact(intent === "greeting" ? "wave" : "talk");
       return;
     }
@@ -175,12 +182,12 @@ export function MascotGuide({ id, variant, onClose, onReact }: MascotGuideProps)
             {entry.from === "user" ? <span>&gt; {entry.text}</span> : entry.text}
             {entry.link && (
               <a
-                href={entry.link}
+                href={entry.link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-1 flex w-fit items-center gap-1 text-accent underline underline-offset-4"
               >
-                {dict.openLink}
+                {entry.link.label}
                 <ArrowUpRight className="size-3" aria-hidden />
               </a>
             )}

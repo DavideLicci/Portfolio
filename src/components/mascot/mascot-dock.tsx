@@ -251,7 +251,7 @@ function Dock({ onHide }: { onHide: () => void }) {
         : `translate ${WALK_MS}ms linear`;
 
   return (
-    <div className="fixed bottom-5 left-6 z-30">
+    <div data-print-hide className="fixed bottom-5 left-6 z-30">
       <div className="group relative w-fit" style={{ translate: `${pos.x}px ${pos.y}px`, transition }}>
         <MascotBubble
           placement="up"

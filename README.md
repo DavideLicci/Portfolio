@@ -32,6 +32,21 @@ I messaggi passano da [Web3Forms](https://web3forms.com), così l'indirizzo emai
 2. Copia `.env.example` come `.env.local` e incolla la chiave in `NEXT_PUBLIC_WEB3FORMS_KEY`.
 3. Su Vercel aggiungi la stessa variabile in **Settings → Environment Variables**.
 
+## Curriculum (CV)
+
+La pagina `/it/cv` (e `/en/cv`) è un foglio A4: lo stesso che viene stampato in PDF. I testi stanno sotto `cv` nei dizionari; istruzione, esperienza, progetti, competenze e certificazioni vengono presi dagli stessi dati del sito, quindi si aggiornano da soli.
+
+- **Versione pubblica** (sul sito): email, GitHub, portfolio e città.
+- **Versione completa** (solo per te): anche telefono e data di nascita, presi da `.env.local` (`CV_PHONE`, `CV_BIRTHDATE`), che **non va mai su GitHub**. Compaiono solo aprendo `/it/cv#completo` in locale.
+
+Per rigenerare i PDF, con `npm run dev` avviato, stampa la pagina da Chrome (Ctrl+P → Salva come PDF, margini "Nessuno") oppure:
+
+```powershell
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --no-pdf-header-footer --virtual-time-budget=10000 --print-to-pdf="public\cv\davide-licci-cv-it.pdf" "http://localhost:3000/it/cv"
+```
+
+Per la versione completa usa l'indirizzo `http://localhost:3000/it/cv#completo` e salva il PDF **fuori dal progetto**.
+
 ## Mascotte (Mini Davide)
 
 Un personaggio 2D in SVG con parti articolate (testa, braccia, gambe, occhi, bocche), in `src/components/mascot/`.

@@ -3,7 +3,9 @@
 export const profile = {
   name: "Davide Licci",
   initials: "DL",
-  role: "Junior Software Developer",
+  site: "https://portfolio-jet-theta-89.vercel.app",
+  email: "liccidavide0@gmail.com",
+  city: "Jesi (AN)",
   github: {
     username: "DavideLicci",
     url: "https://github.com/DavideLicci",
@@ -27,6 +29,18 @@ export const webAndData: Skill[] = [
   { name: "HTML", file: "index.html" },
   { name: "CSS", file: "style.css" },
   { name: "SQL", file: "query.sql" },
+  { name: "PostgreSQL", file: "schema.sql" },
+];
+
+export const engines: Skill[] = [
+  { name: "Unity", file: "Scene.unity" },
+  { name: "Godot", file: "project.godot" },
+  { name: "Blender", file: "model.blend" },
+];
+
+export const apps: Skill[] = [
+  { name: "Flutter", file: "main.dart" },
+  { name: "FastAPI", file: "app.py" },
 ];
 
 export const tools: Skill[] = [{ name: "Git", file: ".gitignore" }];
@@ -34,6 +48,8 @@ export const tools: Skill[] = [{ name: "Git", file: ".gitignore" }];
 // I titoli dei gruppi stanno nei dizionari, sotto skills.groups.
 export const skillGroups = [
   { id: "languages", items: languages },
+  { id: "engines", items: engines },
+  { id: "apps", items: apps },
   { id: "webAndData", items: webAndData },
   { id: "tools", items: tools },
 ] as const;

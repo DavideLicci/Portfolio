@@ -26,11 +26,70 @@ export type Project = {
   stats: { value: number; label: Localized }[];
   tech: string[];
   session?: SessionLine[];
+  // Screenshot (in public/), mostrati come schermi di telefono
+  images?: { src: string; alt: Localized }[];
   repo?: string;
   demo?: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "called-it",
+    title: "Called It!",
+    year: "2026",
+    summary: {
+      it: "App per fare previsioni tra amici in gruppi privati, con monete virtuali senza valore: si punta sulla risposta giusta e il gruppo verifica com'è andata.",
+      en: "An app for making predictions among friends in private groups, with valueless virtual coins: you bet on the right answer and the group checks how it went.",
+    },
+    context: { it: "Progetto personale", en: "Personal project" },
+    team: { it: "Da solo · app completa", en: "Solo · complete app" },
+    description: {
+      it: [
+        "Called It! è un'app mobile, pensata prima di tutto per Android, per fare previsioni tra amici in gruppi privati. Chi crea una previsione inventa da 2 a 10 risposte e il server aggiunge sempre «Nessuna di queste». Ognuno punta quante CallCoins vuole, monete virtuali senza valore, su una sola risposta.",
+        "Dopo l'evento il gruppo verifica l'esito e il server divide il montepremi in proporzione alle puntate. Ci sono classifiche, badge, bonus giornaliero, notifiche e accesso con Google; la beta gira sia su Android sia nel browser.",
+      ],
+      en: [
+        "Called It! is a mobile app, designed for Android first, for making predictions among friends in private groups. Whoever creates a prediction writes 2 to 10 answers and the server always adds “None of these”. Everyone bets as many CallCoins as they like, valueless virtual coins, on a single answer.",
+        "After the event the group checks the outcome and the server splits the prize pool in proportion to the bets. There are leaderboards, badges, a daily bonus, notifications and Google sign-in; the beta runs both on Android and in the browser.",
+      ],
+    },
+    role: {
+      it: "L'ho progettata e sviluppata da solo: app Flutter, database e logica lato server con Supabase, test e pubblicazione della beta.",
+      en: "I designed and built it on my own: the Flutter app, the database and server-side logic with Supabase, the tests and the beta release.",
+    },
+    highlights: {
+      it: [
+        "Backend Supabase su PostgreSQL, con sicurezza a livello di riga (RLS) su tutte le tabelle e funzioni transazionali per puntate, pagamenti ed esiti.",
+        "L'app non scrive mai saldi o puntate: ogni operazione importante è una chiamata al server idempotente, così un doppio tocco non crea una doppia puntata.",
+        "Ogni previsione segue una macchina a stati (aperta, chiusa, in verifica, conclusa o annullata), con una finestra per contestare l'esito.",
+        "Aggiornamenti in tempo reale, archivio privato per avatar e prove, attività programmate sul database con pg_cron.",
+        "App Flutter organizzata in 11 aree, con Riverpod, animazioni curate e rispetto della riduzione del movimento.",
+        "38 test sul database, 31 test Flutter (anche su schermi da 360 e 430 dp) e un collaudo completo sul cloud.",
+      ],
+      en: [
+        "Supabase backend on PostgreSQL, with row-level security (RLS) on every table and transactional functions for bets, payouts and outcomes.",
+        "The app never writes balances or bets: every important action is an idempotent server call, so a double tap never places a double bet.",
+        "Each prediction follows a state machine (open, locked, under review, settled or void), with a window to dispute the outcome.",
+        "Real-time updates, private storage for avatars and proofs, and scheduled database jobs with pg_cron.",
+        "A Flutter app split into 11 areas, with Riverpod, polished animations and support for reduced motion.",
+        "38 database tests, 31 Flutter tests (including 360 and 430 dp screens) and a full end-to-end check on the cloud.",
+      ],
+    },
+    stats: [
+      { value: 11, label: { it: "aree dell'app", en: "app areas" } },
+      { value: 38, label: { it: "test del database", en: "database tests" } },
+      { value: 31, label: { it: "test Flutter", en: "Flutter tests" } },
+      { value: 2, label: { it: "piattaforme: Android e web", en: "platforms: Android and web" } },
+    ],
+    tech: ["Flutter", "Dart", "Supabase", "PostgreSQL", "Riverpod"],
+    images: [
+      { src: "/projects/called-it/home.png", alt: { it: "Home con le previsioni del gruppo", en: "Home screen with the group's predictions" } },
+      { src: "/projects/called-it/puntata.png", alt: { it: "Dettaglio di una previsione con la puntata", en: "Prediction detail while placing a bet" } },
+      { src: "/projects/called-it/crea.png", alt: { it: "Creazione di una nuova previsione", en: "Creating a new prediction" } },
+      { src: "/projects/called-it/classifica.png", alt: { it: "Classifica del gruppo con il podio", en: "Group leaderboard with the podium" } },
+    ],
+    demo: "https://davidelicci.github.io/called-it-beta/",
+  },
   {
     slug: "oltre-il-tempo",
     title: "Oltre il tempo",

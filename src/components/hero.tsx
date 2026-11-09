@@ -1,6 +1,8 @@
-import { ArrowRight, Briefcase, GraduationCap } from "lucide-react";
+import { ArrowRight, Briefcase, FileText, GraduationCap } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { profile } from "@/content/profile";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { primaryButton, secondaryButton } from "./buttons";
 import { HeroBackdrop } from "./hero-backdrop";
@@ -9,7 +11,7 @@ import { MascotSpot } from "./mascot/mascot-spot";
 
 type HeroDict = Dictionary["hero"];
 
-export function Hero({ dict }: { dict: HeroDict }) {
+export function Hero({ lang, dict }: { lang: Locale; dict: HeroDict }) {
   return (
     <section id="top" className="relative overflow-hidden pt-28 pb-24 sm:pt-36 sm:pb-32">
       <HeroBackdrop />
@@ -29,7 +31,7 @@ export function Hero({ dict }: { dict: HeroDict }) {
             </span>
           </h1>
           <p className="mt-5 animate-rise font-mono text-lg text-accent [animation-delay:160ms]">
-            {profile.role}
+            {dict.role}
           </p>
           <p className="mt-6 max-w-xl animate-rise text-base leading-relaxed text-muted [animation-delay:240ms] sm:text-lg">
             {dict.tagline}
@@ -48,6 +50,10 @@ export function Hero({ dict }: { dict: HeroDict }) {
               <GithubIcon className="size-4" />
               {dict.ctaGithub}
             </a>
+            <Link href={`/${lang}/cv`} className={secondaryButton}>
+              <FileText className="size-4" aria-hidden />
+              {dict.ctaCv}
+            </Link>
           </div>
           <MascotSpot variant="hero" className="mt-10" />
         </div>
